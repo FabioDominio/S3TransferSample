@@ -21,6 +21,7 @@ import android.net.Uri;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
 
@@ -68,6 +69,8 @@ public class Util {
     public static AmazonS3Client getS3Client(Context context) {
         if (sS3Client == null) {
             sS3Client = new AmazonS3Client(getCredProvider(context.getApplicationContext()));
+            // Set the region of your S3 bucket
+            sS3Client.setRegion(Region.getRegion(Regions.US_EAST_1));
         }
         return sS3Client;
     }
